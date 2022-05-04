@@ -11,13 +11,22 @@ class HomeComponent extends Component {
         super(props)
         this.state = {
         }
-    }    
+    }   
+    renderText() {
+        if (this.props.loginInfo) {
+           return  <div className='row'>
+                 Welcome: {this.props.loginInfo.userFirstName} {this.props.loginInfo.userLastName}
+            </div>; 
+        }else{
+            return "";
+        }
+    } 
     render() {
         return (
             <>
                 <div className='container-fluid'>
                     <div className='row'>
-                        Welcome: {this.props.loginInfo.userFirstName} {this.props.loginInfo.userLastName}
+                        {this.renderText()}
                     </div>
                     <div className='row'>
                         <div className='col-md-12 mt-5 p-0'>
