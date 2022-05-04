@@ -9,14 +9,11 @@ class LoginComponent extends Component {
         super(props)
         this.state = {
             userName: '',
-            userPassword: '',
-            
+            userPassword: '',            
         }
-
         this.usernameHandler = this.usernameHandler.bind(this);
         this.passwordHandler = this.passwordHandler.bind(this);
         this.login = this.login.bind(this);
-
     }
 
     usernameHandler = (event) => {
@@ -29,10 +26,8 @@ class LoginComponent extends Component {
 
     login = (event) => {
         event.preventDefault();
-
         let datas = { userName: this.state.userName, userPassword: this.state.userPassword };
         AddressService.createLogin(datas).then(res => {
-
             //Store userToken detail in localStorage
             localStorage.setItem('jwtToken', res.data.jwtToken);
 
@@ -49,20 +44,15 @@ class LoginComponent extends Component {
                     Authorization: 'Bearer ' + localStorage.getItem('jwtToken')
                 }
             };
-            axios.get('http://localhost:9090/forUser', config).then(
+            axios.get('http://localhost:9090/forUser?user='+datas['userName'], config).then(
                 response => {
                     alert(response.data);
+                    this.props.updateLoginData(response.data);
                     // this.state = ({ userData: response.data})
                     this.props.history.push("/");
                 }
             )
-
-
-
         })
-
-
-
     }
 
     render() {

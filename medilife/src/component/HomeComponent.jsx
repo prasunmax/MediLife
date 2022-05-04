@@ -10,17 +10,15 @@ class HomeComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
         }
-    }
-
-    
-    
+    }    
     render() {
         return (
             <>
                 <div className='container-fluid'>
-                    
+                    <div className='row'>
+                        Welcome: {this.props.loginInfo.userFirstName} {this.props.loginInfo.userLastName}
+                    </div>
                     <div className='row'>
                         <div className='col-md-12 mt-5 p-0'>
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

@@ -17,10 +17,12 @@ import MedicineListComponent from './component/MedicineListComponent';
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state={}
-
-   
+    this.state={}  
    }
+
+  loginData = (data) => {
+     this.state.data = data;
+  }
    
   render() {
     return (
@@ -29,12 +31,12 @@ class App extends Component {
           <HeaderComponent></HeaderComponent>
           <Switch>
             
-            <Route path="/" exact component={HomeComponent} />
+            <Route path="/" exact component={ () => <HomeComponent loginInfo = {this.state.data} />} />
             <Route path="/about" component={AboutComponent}></Route>
             <Route path="/contact" component={ContactComponent} ></Route>
             <Route path="/medicine-list" component={MedicineListComponent}></Route>
 
-            <Route path="/user-login" component={LoginComponent}></Route>
+            <Route path="/user-login" component={() => <LoginComponent updateLoginData={this.loginData} />}></Route>
             {/* <Route path="/admin-login" component={AdminLoginComponent}></Route> */}
             <Route path="/user-signup" component={SignupComponent}></Route>
           </Switch>
